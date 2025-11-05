@@ -36,7 +36,23 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
+  sample_pipeline:
+    # Config indicated by + and applies to all files under models/example/
+    staging:
+      +materialized: view
+      +snowflake_warehouse: COMPUTE_WH
+      +schema: staging
+    inter:
       +materialized: table
+      +transient: false
+      +snowflake_warehouse: COMPUTE_WH
+      +schema: inter
+    marts:
+      +materialized: table
+      +transient: false
+      +snowflake_warehouse: COMPUTE_WH
+      +schema: marts
+    test_sample:
+      +materialized: view
+      +snowflake_warehouse: COMPUTE_WH
+      +schema: test_sample
